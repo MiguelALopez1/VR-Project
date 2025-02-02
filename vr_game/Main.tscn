@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c4rap4bowkegi"]
+[gd_scene load_steps=15 format=3 uid="uid://c4rap4bowkegi"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_yitxt"]
 [ext_resource type="PackedScene" uid="uid://bmgy5ij12adyb" path="res://Blueprints/xr_player.tscn" id="2_b3t76"]
+[ext_resource type="PackedScene" uid="uid://dr7cn7fs6jver" path="res://Blueprints/pickable_object.tscn" id="3_drvqa"]
+[ext_resource type="Shader" path="res://ocean.gdshader" id="4_ukc46"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_m4ldt"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -26,6 +28,26 @@ albedo_color = Color(0.393086, 0.393086, 0.393085, 1)
 material = SubResource("StandardMaterial3D_umxjk")
 size = Vector3(10, 0.1, 10)
 
+[sub_resource type="BoxMesh" id="BoxMesh_mw4lb"]
+size = Vector3(3, 0.6, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3xoqx"]
+data = PackedVector3Array(-1.5, 0.3, 0.5, 1.5, 0.3, 0.5, -1.5, -0.3, 0.5, 1.5, 0.3, 0.5, 1.5, -0.3, 0.5, -1.5, -0.3, 0.5, 1.5, 0.3, -0.5, -1.5, 0.3, -0.5, 1.5, -0.3, -0.5, -1.5, 0.3, -0.5, -1.5, -0.3, -0.5, 1.5, -0.3, -0.5, 1.5, 0.3, 0.5, 1.5, 0.3, -0.5, 1.5, -0.3, 0.5, 1.5, 0.3, -0.5, 1.5, -0.3, -0.5, 1.5, -0.3, 0.5, -1.5, 0.3, -0.5, -1.5, 0.3, 0.5, -1.5, -0.3, -0.5, -1.5, 0.3, 0.5, -1.5, -0.3, 0.5, -1.5, -0.3, -0.5, 1.5, 0.3, 0.5, -1.5, 0.3, 0.5, 1.5, 0.3, -0.5, -1.5, 0.3, 0.5, -1.5, 0.3, -0.5, 1.5, 0.3, -0.5, -1.5, -0.3, 0.5, 1.5, -0.3, 0.5, -1.5, -0.3, -0.5, 1.5, -0.3, 0.5, 1.5, -0.3, -0.5, -1.5, -0.3, -0.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8qdhj"]
+top_radius = 1000.0
+height = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q7tkb"]
+render_priority = 0
+shader = ExtResource("4_ukc46")
+shader_parameter/WATER_COL = Color(0.04, 0.38, 0.88, 1)
+shader_parameter/WATER2_COL = Color(0.04, 0.35, 0.78, 1)
+shader_parameter/FOAM_COL = Color(0.8125, 0.9609, 0.9648, 1)
+shader_parameter/distortion_speed = 2.0
+shader_parameter/tile = Vector2(100, 100)
+shader_parameter/wave_speed = 1.5
+
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_yitxt")
 
@@ -33,10 +55,12 @@ script = ExtResource("1_yitxt")
 environment = SubResource("Environment_72yta")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+transform = Transform3D(-0.63157, -0.59669, 0.495056, -0.176272, 0.732305, 0.657766, -0.755015, 0.328161, -0.567682, 7.72202, 9.97326, -15.134)
+light_color = Color(0.980392, 0.854902, 0.478431, 1)
 shadow_enabled = true
 
 [node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_16nd3")
@@ -45,3 +69,33 @@ shape = SubResource("BoxShape3D_16nd3")
 mesh = SubResource("BoxMesh_y4sqi")
 
 [node name="XROrigin3D" parent="." instance=ExtResource("2_b3t76")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07618, 0)
+
+[node name="Table" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0494816, 0.35807, -3.91082)
+mesh = SubResource("BoxMesh_mw4lb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0494816, 0.35807, -3.91082)
+shape = SubResource("ConcavePolygonShape3D_3xoqx")
+
+[node name="PickableObject" parent="." instance=ExtResource("3_drvqa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.487414, 0.736974, -3.93028)
+
+[node name="PickableObject2" parent="." instance=ExtResource("3_drvqa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0102721, 0.741752, -4.02166)
+
+[node name="PickableObject3" parent="." instance=ExtResource("3_drvqa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425447, 0.749803, -3.69561)
+
+[node name="PickableObject4" parent="." instance=ExtResource("3_drvqa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.325054, 0.760699, -3.70472)
+
+[node name="PickableObject5" parent="." instance=ExtResource("3_drvqa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.134606, 0.734099, -3.70224)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_8qdhj")
+surface_material_override/0 = SubResource("ShaderMaterial_q7tkb")
