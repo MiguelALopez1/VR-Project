@@ -1,6 +1,7 @@
 StaticBody3D
-GridMap
+Node3D
 MeshInstance3D
+GridMap
 CollisionShape3D
 XRController3D
 XRCamera3D

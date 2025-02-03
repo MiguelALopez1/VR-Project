@@ -4,3 +4,9 @@ res://addons/godot-xr-tools/hands/animations/left/hand_blend_tree.tres
 res://addons/godot-xr-tools/hands/animations/right/hand_blend_tree.tres
 res://tiles2.tres
 res://ocean.gdshader
+res://Blueprints/pickable_object.tscn
+res://tiles.tscn
+res://table.tscn
+res://Blueprints/table.tscn
+res://Blueprints/tiles2.tres
+res://Blueprints/tiles.tscn
