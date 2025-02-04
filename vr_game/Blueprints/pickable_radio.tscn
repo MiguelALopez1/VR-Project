@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://dr7cn7fs6jver"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_1nnc6"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="2_1skxn"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="3_7hleg"]
+[ext_resource type="AudioStream" uid="uid://mu22rnehthxf" path="res://Assets/Audio/music_zapsplat_game_music_childrens_soft_warm_cuddly_calm_015.mp3" id="4_qbihi"]
+[ext_resource type="PackedScene" uid="uid://dhqfwx5mq4c83" path="res://Assets/Other/Radio.glb" id="5_77pgx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ucjvv"]
+size = Vector3(0.384771, 0.312519, 0.248145)
+
+[node name="PickableRadio" instance=ExtResource("1_1nnc6")]
+mass = 2.0
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(0.999421, 0.00214125, 0.0339682, -0.00214715, 0.999998, 0.000137215, -0.0339678, -0.000210074, 0.999423, -0.00696388, 0.153356, -0.0289944)
+shape = SubResource("BoxShape3D_ucjvv")
+
+[node name="GrabPointHandLeft" parent="." index="1" instance=ExtResource("2_1skxn")]
+transform = Transform3D(0.999959, 0, 0.00902323, 0, 1, 0, -0.00902323, 0, 0.999959, -0.222947, 0.153493, -0.109097)
+visible = true
+
+[node name="GrabPointHandRight" parent="." index="2" instance=ExtResource("3_7hleg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.180863, 0.150892, -0.115234)
+visible = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="3"]
+stream = ExtResource("4_qbihi")
+autoplay = true
+max_distance = 9.0
+
+[node name="Root Scene" parent="." index="4" instance=ExtResource("5_77pgx")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0180709, 0.00195134, -0.0958197)
