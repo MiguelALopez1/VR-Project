@@ -1,7 +1,7 @@
-GridMap
-MeshInstance3D
 CollisionShape3D
 StaticBody3D
+GridMap
+MeshInstance3D
 XRToolsPickableAudio
 AudioStreamPlayer3D
 XRToolsGrabPoint
