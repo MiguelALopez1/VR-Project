@@ -1,0 +1,36 @@
+[gd_scene load_steps=9 format=3 uid="uid://bcxgacc8fwv65"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_7dsgy"]
+[ext_resource type="PackedScene" uid="uid://div8e04x67pol" path="res://Assets/Other/Sword.glb" id="2_8u3nj"]
+[ext_resource type="Shape3D" uid="uid://dguhkjn5s44si" path="res://Blueprints/swordcollision.tres" id="2_j255h"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="3_tvsqj"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="4_onrtg"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/audio/pickable_audio.gd" id="7_lnfil"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/audio/pickable_audio_type.gd" id="8_l7167"]
+
+[sub_resource type="Resource" id="Resource_2cevf"]
+script = ExtResource("8_l7167")
+name = ""
+
+[node name="PickableObject" instance=ExtResource("1_7dsgy")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, 0.02)
+shape = ExtResource("2_j255h")
+
+[node name="Root Scene" parent="." index="1" instance=ExtResource("2_8u3nj")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.000127673, 0.10462, 0.0191565)
+
+[node name="GrabPointHandLeft" parent="." index="2" instance=ExtResource("3_tvsqj")]
+transform = Transform3D(1, 0, 0, 0, 0.920505, -0.390731, 0, 0.390731, 0.920505, 0.00526887, 0.108189, -0.0552128)
+visible = true
+
+[node name="GrabPointHandRight" parent="." index="3" instance=ExtResource("4_onrtg")]
+transform = Transform3D(1, 0, 0, 0, 0.920505, -0.390731, 0, 0.390731, 0.920505, -0.0138287, 0.105182, -0.0622996)
+visible = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="4"]
+
+[node name="XRToolsPickableAudio" type="AudioStreamPlayer3D" parent="AudioStreamPlayer3D" index="0"]
+script = ExtResource("7_lnfil")
+pickable_audio_type = SubResource("Resource_2cevf")

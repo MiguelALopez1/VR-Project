@@ -1,9 +1,9 @@
+AudioStreamPlayer3D
+XRToolsPickableAudio
 CollisionShape3D
 StaticBody3D
 GridMap
 MeshInstance3D
-XRToolsPickableAudio
-AudioStreamPlayer3D
 XRToolsGrabPoint
 CollisionPolygon3D
 RigidBody3D
